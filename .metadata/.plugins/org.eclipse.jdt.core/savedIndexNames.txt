@@ -1,19 +1,3 @@
-INDEX VERSION 1.127+C:\Users\Sean Keane\Documents\GMIT\Software Engineering\Mp3-Player\.metadata\.plugins\org.eclipse.jdt.core
-4041092966.index
-3974580528.index
-3073728360.index
-4108727661.index
-1498219845.index
-163172794.index
-3065916431.index
-377184985.index
-1995173708.index
-30765161.index
-3133528496.index
-1115467115.index
-1729730662.index
-1697886153.index
-305854171.index
-1299022128.index
+INDEX VERSION 1.127+C:\Users\Judge\Desktop\Mp3-Player\.metadata\.plugins\org.eclipse.jdt.core
 1876952846.index
-4155206848.index
+4044885026.index
