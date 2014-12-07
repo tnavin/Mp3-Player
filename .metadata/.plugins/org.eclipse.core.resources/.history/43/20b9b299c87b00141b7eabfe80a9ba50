@@ -1,0 +1,59 @@
+package code;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import net.miginfocom.swing.MigLayout;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				/*
+				 * Create frame
+				 * Set border 
+				 * Wrap in Mig layout
+				 * show debug mode in Mig layout
+				 * 
+				 */
+				//Create frame
+				JFrame frame = new JFrame ("MP3 Player");
+
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLocation(500, 400);
+				//Create Panels
+				JPanel mainPanel = new JPanel(new MigLayout(""));
+				mainPanel.setBounds(0, 0, 500, 400);
+			
+				JPanel johnPanel = new JPanel(new MigLayout(""));
+				JLabel johnLabel = new JLabel("John Panel");
+				johnPanel.add(johnLabel, BorderLayout.CENTER);
+				JPanel seanPanel = new JPanel();
+				JLabel seanLabel = new JLabel("Sean Panel");
+				johnPanel.add(seanLabel, BorderLayout.CENTER);
+				JPanel tommiePanel = new JPanel();
+				JLabel tommieLabel = new JLabel("Tommie Panel");
+				johnPanel.add(johnLabel, BorderLayout.CENTER);
+				//Add panels to main panel
+				mainPanel.add(johnPanel);
+				mainPanel.add(seanPanel, "wrap");
+				mainPanel.add(tommiePanel);
+				frame.add(mainPanel, BorderLayout.CENTER);
+				frame.pack();
+				frame.setVisible(true);
+				
+			}
+		});
+		
+	}
+
+}
