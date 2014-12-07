@@ -3,9 +3,12 @@ package code;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -61,7 +64,10 @@ public class MainWindow {
 		splitPanel.add(seanTabbedPane, "cell 0 0,grow");
 		
 		JPanel tommiePanel = new JPanel();
-		tommiePanel.setBackground(SystemColor.activeCaption);
+		
+		
+		tommiePanel.add(tracks.getDisplayPanel());
+		
 		splitPanel.add(tommiePanel, "cell 1 0,grow");
 	}
 	
