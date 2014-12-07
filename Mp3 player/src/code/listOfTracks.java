@@ -3,7 +3,6 @@ package code;
 import java.awt.List;
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -25,13 +24,9 @@ public class listOfTracks extends JPanel {
 	public void setSongPanel() {
 		ArrayList<SongObject> songList = new ArrayList<SongObject>();
 		songList.add(new SongObject("Song1", 
-				"Album1",
 				"Artist1",
 				"path1"));
-		SongObject song1 = new SongObject("Song1", 
-				"Album1",
-				"Artist1",
-				"path1");
+		
 		songsListBox = new JList<SongObject>();
 		//songsListBox.add("First song") ;
 		songPanel.add(songsListBox, "span, grow");
