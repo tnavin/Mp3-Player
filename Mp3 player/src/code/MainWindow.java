@@ -1,7 +1,6 @@
 package code;
 
 import java.awt.EventQueue;
-import java.awt.List;
 import java.awt.SystemColor;
 
 import javax.swing.JFrame;
@@ -67,6 +66,7 @@ public class MainWindow {
 	}
 	
 	private void songsSetup(listOfTracks tracks){
+
 		tracks.setArtistPanel();
 		tracks.setSongPanel();
 	}

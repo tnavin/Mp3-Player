@@ -1,13 +1,13 @@
 package code;
 
-
-
-import java.awt.FlowLayout;
 import java.io.File;
-import javax.swing.JFrame;
+import java.util.List;
+
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -15,9 +15,12 @@ public class listOfTracks extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	private File currentSelectedSong;
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
-	private JList<SongObject> songsListBox;
+	private JScrollPane scrollListSong;
+	private JList<File> listSong;
+	private List<File> currentSelectedSongList;
 	
 	public listOfTracks() {
 
@@ -25,22 +28,28 @@ public class listOfTracks extends JPanel {
 
 	public void setSongPanel() {
 
-		//songPanel.add(songsListBox, "span, grow");
+		listSong = new JList<File>(getListFromFolder("res\\music"));
+		scrollListSong = new JScrollPane(listSong);
+	    artistPanel.add(scrollListSong);
+	    
+	    ListSelectionListener listSelectionListener = new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				boolean adjust = listSong.getValueIsAdjusting();
+				if(!adjust){
+					currentSelectedSongList = listSong.getSelectedValuesList();
+					currentSelectedSong = currentSelectedSongList.get(0);
+					System.out.println(currentSelectedSong);
+				}
+			}
+	    };
+	    listSong.addListSelectionListener(listSelectionListener);
 	}
 
 	public void setArtistPanel() {
-		JFrame.setDefaultLookAndFeelDecorated(true);
-	    JFrame frame = new JFrame("JList Test");
-	    frame.setLayout(new FlowLayout());
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    String[] selections = { "green", "red", "orange", "dark blue" };
-	    JList list = new JList(selections);
-	    list.setSelectedIndex(1);
-	    System.out.println(list.getSelectedValue());
-	    frame.add(new JScrollPane(list));
-	    frame.pack();
 
-	    frame.setVisible(true);
+		
 	}
 
 
@@ -55,9 +64,12 @@ public class listOfTracks extends JPanel {
 	public File[] getListFromFolder(String path){
 		File folder = new File(path);
 		File[] list = folder.listFiles();
-
 		  
 		return list;
+	}
+
+	public File getCurrentSelectedSong() {
+		return currentSelectedSong;
 	}
 
 }
