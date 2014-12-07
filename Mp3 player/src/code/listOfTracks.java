@@ -1,7 +1,9 @@
 package code;
 
-import java.awt.FlowLayout;
 
+
+import java.awt.FlowLayout;
+import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -49,6 +51,13 @@ public class listOfTracks extends JPanel {
 	public JPanel getArtistPanel() {
 		return artistPanel;
 	}
+	
+	public File[] getListFromFolder(String path){
+		File folder = new File(path);
+		File[] list = folder.listFiles();
 
+		  
+		return list;
+	}
 
 }
