@@ -65,8 +65,8 @@ public class MainWindow {
 		
 		JPanel tommiePanel = new JPanel();
 		
-		DisplayDetails display = new DisplayDetails();
-		tommiePanel.add(display.getImagedisplay());
+		
+		tommiePanel.add(tracks.getDisplayPanel());
 		
 		splitPanel.add(tommiePanel, "cell 1 0,grow");
 	}

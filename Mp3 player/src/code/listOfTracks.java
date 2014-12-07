@@ -3,6 +3,8 @@ package code;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,12 +20,15 @@ public class listOfTracks extends JPanel {
 	private File currentSelectedSong;
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
+	private JPanel imagedisplay = new JPanel(new MigLayout("Debug"));
+	private JLabel ta = new JLabel();
 	private JScrollPane scrollListSong;
 	private JList<File> listSong;
 	private List<File> currentSelectedSongList;
 	
 	public listOfTracks() {
-
+		
+		
 	}
 
 	public void setSongPanel() {
@@ -41,6 +46,14 @@ public class listOfTracks extends JPanel {
 					currentSelectedSongList = listSong.getSelectedValuesList();
 					currentSelectedSong = currentSelectedSongList.get(0);
 					System.out.println(currentSelectedSong);
+					ta.setText(getCurrentSelectedSong().toString());
+					imagedisplay.add(ta);
+					ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
+					JLabel label1   = new JLabel();
+					label1.setIcon(icon);
+					imagedisplay.add(label1);
+
+			
 				}
 			}
 	    };
@@ -59,6 +72,9 @@ public class listOfTracks extends JPanel {
 
 	public JPanel getArtistPanel() {
 		return artistPanel;
+	}
+	public JPanel getDisplayPanel() {
+		return imagedisplay;
 	}
 	
 	public File[] getListFromFolder(String path){
