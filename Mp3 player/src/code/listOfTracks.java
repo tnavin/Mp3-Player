@@ -1,6 +1,7 @@
 package code;
 
 import java.awt.List;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JList;
@@ -58,6 +59,14 @@ public class listOfTracks extends JPanel {
 
 	public JPanel getAlbumPanel() {
 		return albumPanel;
+	}
+	
+	public File[] getListFromFolder(String path){
+		File folder = new File(path);
+		File[] list = folder.listFiles();
+
+		  
+		return list;
 	}
 
 }
