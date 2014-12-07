@@ -1,7 +1,6 @@
 package code;
 
 import java.awt.EventQueue;
-import java.awt.List;
 import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
@@ -61,7 +60,6 @@ public class MainWindow {
 		listOfTracks tracks = new listOfTracks();
 		songsSetup(tracks);
 		seanTabbedPane.add("Artists", tracks.getArtistPanel());
-		seanTabbedPane.add("Albums", tracks.getAlbumPanel());
 		seanTabbedPane.add("Songs", tracks.getSongPanel());
 		splitPanel.add(seanTabbedPane, "cell 0 0,grow");
 		
@@ -74,7 +72,7 @@ public class MainWindow {
 	}
 	
 	private void songsSetup(listOfTracks tracks){
-		tracks.setAlbumPanel();
+
 		tracks.setArtistPanel();
 		tracks.setSongPanel();
 	}
