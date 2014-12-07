@@ -1,24 +1,29 @@
 package code;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import net.miginfocom.swing.MigLayout;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.ID3v1;
 
 public class listOfTracks extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	private ArrayList<String> artistList;
 	private File currentSelectedSong;
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
 	private JScrollPane scrollListSong;
+	private JScrollPane scrollListArtist;
 	private JList<File> listSong;
 	private List<File> currentSelectedSongList;
 	
@@ -48,7 +53,20 @@ public class listOfTracks extends JPanel {
 	}
 
 	public void setArtistPanel() {
-
+		File[] MP3list = getListFromFolder("res\\music");
+		artistList = new ArrayList<>();
+		for(File file : MP3list){
+			File src = new File(file.getAbsolutePath());
+			try {
+				ID3v1 tag = new MP3File(src).getID3v1Tag();
+				artistList.add(tag.getArtist());
+				System.out.println(tag.getArtist());
+			} catch (IOException | TagException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		
 	}
 
@@ -71,5 +89,11 @@ public class listOfTracks extends JPanel {
 	public File getCurrentSelectedSong() {
 		return currentSelectedSong;
 	}
+
+	public ArrayList<String> getArtistList() {
+		return artistList;
+	}
+	
+	
 
 }
