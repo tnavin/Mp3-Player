@@ -1,35 +1,57 @@
 package code;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import java.awt.List;
+import java.util.ArrayList;
 
-public class listOfTracks extends JTabbedPane {
+import javax.swing.JList;
+import javax.swing.JPanel;
 
-	/**
-	 * 
-	 */
+import net.miginfocom.swing.MigLayout;
+
+public class listOfTracks extends JPanel {
+
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Create the panel.
-	 */
+	
+	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
+	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
+	private JPanel albumPanel = new JPanel(new MigLayout("Debug"));
+	private JList<String> songsListBox;
+	
 	public listOfTracks() {
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		JPanel artists = new JPanel();
-		JPanel albums = new JPanel();
-		tabbedPane.add("Artists", artists);
-		tabbedPane.add("Albums", albums);
-		List songList = new List();
 		
-		songList.add("First");
-		songList.add("Sean", 0);
-		
-		tabbedPane.add("Songs", songList);
-		
-		
+	}
 
-		setVisible(true); 
+	public void setSongPanel() {
+		ArrayList<String> songList = new ArrayList<String>();
+		songList.add("First");
+		songList.add("Second");
+
+		songsListBox = new JList(songList.toArray());
+		songPanel.add(songsListBox, "span, grow");
+	}
+
+	public void setArtistPanel() {
+		
+	}
+
+	public void setAlbumPanel() {
+		List album = new List();
+		album.add("First Album");
+		album.add("Second Album");
+		album.add("Third Album");
+		albumPanel.add(album);
+	}
+
+	public JPanel getSongPanel() {
+		return songPanel;
+	}
+
+	public JPanel getArtistPanel() {
+		return artistPanel;
+	}
+
+	public JPanel getAlbumPanel() {
+		return albumPanel;
 	}
 
 }

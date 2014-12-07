@@ -55,18 +55,22 @@ public class MainWindow {
 		splitPanel.setLayout(new MigLayout("", "[grow,left][grow,right]", "[grow,center]"));
 
 		JTabbedPane seanTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		JPanel artists = new JPanel();
-		JPanel albums = new JPanel();
-		seanTabbedPane.add("Artists", artists);
-		seanTabbedPane.add("Albums", albums);
-		List songList = new List();
-		
-		seanTabbedPane.add("Songs", songList);
+		listOfTracks tracks = new listOfTracks();
+		songsSetup(tracks);
+		seanTabbedPane.add("Artists", tracks.getArtistPanel());
+		seanTabbedPane.add("Albums", tracks.getAlbumPanel());
+		seanTabbedPane.add("Songs", tracks.getSongPanel());
 		splitPanel.add(seanTabbedPane, "cell 0 0,grow");
 		
 		JPanel tommiePanel = new JPanel();
 		tommiePanel.setBackground(SystemColor.activeCaption);
 		splitPanel.add(tommiePanel, "cell 1 0,grow");
+	}
+	
+	private void songsSetup(listOfTracks tracks){
+		tracks.setAlbumPanel();
+		tracks.setArtistPanel();
+		tracks.setSongPanel();
 	}
 
 }
