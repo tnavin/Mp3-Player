@@ -1,10 +1,12 @@
 package code;
 
 import java.awt.EventQueue;
+import java.awt.List;
 import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -51,14 +53,24 @@ public class MainWindow {
 		JPanel splitPanel = new JPanel();
 		frame.getContentPane().add(splitPanel, "cell 0 1,grow");
 		splitPanel.setLayout(new MigLayout("", "[grow,left][grow,right]", "[grow,center]"));
-		
-		JPanel seanPanel = new JPanel();
-		seanPanel.setBackground(SystemColor.activeCaption);
-		splitPanel.add(seanPanel, "cell 0 0,grow");
+
+		JTabbedPane seanTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		listOfTracks tracks = new listOfTracks();
+		songsSetup(tracks);
+		seanTabbedPane.add("Artists", tracks.getArtistPanel());
+		seanTabbedPane.add("Albums", tracks.getAlbumPanel());
+		seanTabbedPane.add("Songs", tracks.getSongPanel());
+		splitPanel.add(seanTabbedPane, "cell 0 0,grow");
 		
 		JPanel tommiePanel = new JPanel();
 		tommiePanel.setBackground(SystemColor.activeCaption);
 		splitPanel.add(tommiePanel, "cell 1 0,grow");
+	}
+	
+	private void songsSetup(listOfTracks tracks){
+		tracks.setAlbumPanel();
+		tracks.setArtistPanel();
+		tracks.setSongPanel();
 	}
 
 }
