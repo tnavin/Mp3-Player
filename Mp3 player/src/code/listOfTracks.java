@@ -1,9 +1,11 @@
 package code;
 
-import java.awt.List;
-import java.util.ArrayList;
+import java.awt.FlowLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -13,7 +15,6 @@ public class listOfTracks extends JPanel {
 	
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
-	private JPanel albumPanel = new JPanel(new MigLayout("Debug"));
 	private JList<SongObject> songsListBox;
 	
 	public listOfTracks() {
@@ -21,27 +22,25 @@ public class listOfTracks extends JPanel {
 	}
 
 	public void setSongPanel() {
-		ArrayList<SongObject> songList = new ArrayList<SongObject>();
-		songList.add(new SongObject("Song1", 
-				"Artist1",
-				"path1"));
-		
-		songsListBox = new JList<SongObject>();
-		//songsListBox.add("First song") ;
-		songPanel.add(songsListBox, "span, grow");
+
+		//songPanel.add(songsListBox, "span, grow");
 	}
 
 	public void setArtistPanel() {
-		
+		JFrame.setDefaultLookAndFeelDecorated(true);
+	    JFrame frame = new JFrame("JList Test");
+	    frame.setLayout(new FlowLayout());
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    String[] selections = { "green", "red", "orange", "dark blue" };
+	    JList list = new JList(selections);
+	    list.setSelectedIndex(1);
+	    System.out.println(list.getSelectedValue());
+	    frame.add(new JScrollPane(list));
+	    frame.pack();
+
+	    frame.setVisible(true);
 	}
 
-	public void setAlbumPanel() {
-		List album = new List();
-		album.add("First Album");
-		album.add("Second Album");
-		album.add("Third Album");
-		albumPanel.add(album);
-	}
 
 	public JPanel getSongPanel() {
 		return songPanel;
@@ -51,8 +50,5 @@ public class listOfTracks extends JPanel {
 		return artistPanel;
 	}
 
-	public JPanel getAlbumPanel() {
-		return albumPanel;
-	}
 
 }
