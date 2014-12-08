@@ -9,11 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 
 import net.miginfocom.swing.MigLayout;
 
 public class MainWindow {
 
+	private Buttons buttons;
 	private JFrame frame;
 
 	/**
@@ -51,7 +53,23 @@ public class MainWindow {
 		JPanel johnPanel = new JPanel();
 		johnPanel.setBackground(SystemColor.activeCaption);
 		frame.getContentPane().add(johnPanel, "cell 0 0,grow");
+
+		//play song in the background thread
+		SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>(){
+
+			@Override
+			protected Void doInBackground() throws Exception {
+				buttons = new Buttons();
+				buttons.playSong();
+				return null;
+			}
+
+			
+		};
+		sw.execute();
 		
+		buttons.stopSong();
+
 		JPanel splitPanel = new JPanel();
 		frame.getContentPane().add(splitPanel, "cell 0 1,grow");
 		splitPanel.setLayout(new MigLayout("", "[grow,left][grow,right]", "[grow,center]"));
