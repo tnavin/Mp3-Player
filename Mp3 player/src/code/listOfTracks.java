@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -25,14 +26,16 @@ public class listOfTracks extends JPanel {
 	
 	private ArrayList<String> artistList;
 	private ArrayList<String> songList;
+	private ArrayList<String> albumList;
 	private String currentSelectedSong;
+	private StringBuilder sb = new StringBuilder(64);
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel imagedisplay = new JPanel(new MigLayout("Debug"));
 	private ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
 	private ImageIcon icon2 = new ImageIcon("res\\images\\Taylor Swift.jpg");
 	private JLabel label1   = new JLabel();
-	private JLabel ta = new JLabel();
+	private JTextArea ta = new JTextArea();
 	private JScrollPane scrollListSong;
 	private JScrollPane scrollListArtist;
 	private JList<String> listSong;
@@ -49,12 +52,18 @@ public class listOfTracks extends JPanel {
 		
 		//Get the songs name
 		songList = new ArrayList<>();
+		artistList = new ArrayList<>();
+		albumList = new ArrayList<>();
 		for(File file : MP3list){
 			File src = new File(file.getAbsolutePath());
 			try {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
+
 				songList.add(tag.getTitle());
+				artistList.add(tag.getArtist());
+				albumList.add(tag.getAlbum());
 				System.out.println(tag.getTitle());
+
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,14 +85,27 @@ public class listOfTracks extends JPanel {
 				boolean adjust = listSong.getValueIsAdjusting();
 				if(!adjust){
 					currentSelectedSongList = listSong.getSelectedValuesList();
+					int i = listSong.getSelectedIndex();
+					
 					currentSelectedSong = currentSelectedSongList.get(0);
+
 					if(getCurrentSelectedSong().toString().equalsIgnoreCase("Jubel")){
 						label1.setIcon(icon);
 					}
 					else{
 						label1.setIcon(icon2);
 					}
-					ta.setText(getCurrentSelectedSong().toString());
+				
+
+					System.out.println(currentSelectedSong);
+					
+					sb.append("Song Title: " + songList.get(i)).
+					append("\nSong Artist: " + artistList.get(i)).
+					append("\nSong Album: " + albumList.get(i));
+					
+					ta.setText(sb.toString());
+					ta.setEditable(false);
+					sb.setLength(0);
 					imagedisplay.add(ta);
 					imagedisplay.add(label1);
 
@@ -97,12 +119,16 @@ public class listOfTracks extends JPanel {
 		File[] MP3list = getListFromFolder("res\\music");
 		
 		//Get the songs name
+		songList = new ArrayList<>();
 		artistList = new ArrayList<>();
+		albumList = new ArrayList<>();
 		for(File file : MP3list){
 			File src = new File(file.getAbsolutePath());
 			try {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
+				songList.add(tag.getTitle());
 				artistList.add(tag.getArtist());
+				albumList.add(tag.getAlbum());
 				System.out.println(tag.getArtist());
 				ta.setText(tag.getArtist());
 	
@@ -128,15 +154,27 @@ public class listOfTracks extends JPanel {
 				boolean adjust = listArtist.getValueIsAdjusting();
 				if(!adjust){
 					currentSelectedSongList = listArtist.getSelectedValuesList();
+					
+					int i = listSong.getSelectedIndex();
 					currentSelectedSong = currentSelectedSongList.get(0);
 					System.out.println(currentSelectedSong);
+
 					if(getCurrentSelectedSong().toString().equalsIgnoreCase("Taylor Swift")){
 						label1.setIcon(icon2);
+						
 					}
 					else{
 						label1.setIcon(icon);
 					}
-					ta.setText(getCurrentSelectedSong().toString());
+				
+
+					sb.append("Song Title: " + songList.get(i)).
+					append("\nSong Artist: " + artistList.get(i)).
+					append("\nSong Album: " + albumList.get(i));
+					
+					ta.setText(sb.toString());
+					ta.setEditable(false);
+					sb.setLength(0);
 					imagedisplay.add(ta);
 					imagedisplay.add(label1);
 				
