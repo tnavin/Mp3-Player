@@ -25,6 +25,8 @@ public class listOfTracks extends JPanel {
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel imagedisplay = new JPanel(new MigLayout("Debug"));
+	private ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
+	private JLabel label1   = new JLabel();
 	private JLabel ta = new JLabel();
 	private JScrollPane scrollListSong;
 	private JScrollPane scrollListArtist;
@@ -51,12 +53,10 @@ public class listOfTracks extends JPanel {
 					currentSelectedSongList = listSong.getSelectedValuesList();
 					currentSelectedSong = currentSelectedSongList.get(0);
 					System.out.println(currentSelectedSong);
-					ta.setText(getCurrentSelectedSong().toString());
 					imagedisplay.add(ta);
-					ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
-					JLabel label1   = new JLabel();
 					label1.setIcon(icon);
 					imagedisplay.add(label1);
+					
 
 			
 				}
@@ -74,6 +74,7 @@ public class listOfTracks extends JPanel {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
 				artistList.add(tag.getArtist());
 				System.out.println(tag.getArtist());
+				ta.setText(tag.getArtist());
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
