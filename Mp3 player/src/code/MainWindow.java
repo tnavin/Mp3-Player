@@ -11,6 +11,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JButton;
+import java.awt.Color;
 
 public class MainWindow {
 
@@ -44,13 +46,29 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(184, 134, 11));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow,center]", "[100px:n:100px,grow][grow]"));
 		
 		JPanel johnPanel = new JPanel();
-		johnPanel.setBackground(SystemColor.activeCaption);
-		frame.getContentPane().add(johnPanel, "cell 0 0,grow");
+		johnPanel.setBackground(new Color(153, 180, 209));
+		frame.getContentPane().add(johnPanel, "cell 0 0,growx,aligny center");
+		
+		JLabel lblMpPlayer = new JLabel("MP3 PLAYER");
+		johnPanel.add(lblMpPlayer);
+		
+		JButton btnRwd = new JButton("RWD");
+		johnPanel.add(btnRwd);
+		
+		JButton btnPlay = new JButton("PLAY");
+		johnPanel.add(btnPlay);
+		
+		JButton btnFwd = new JButton("FWD");
+		johnPanel.add(btnFwd);
+		
+		JButton btnStop = new JButton("STOP");
+		johnPanel.add(btnStop);
 		
 		JPanel splitPanel = new JPanel();
 		frame.getContentPane().add(splitPanel, "cell 0 1,grow");
