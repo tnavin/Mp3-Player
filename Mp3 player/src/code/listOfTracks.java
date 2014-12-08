@@ -25,6 +25,7 @@ public class listOfTracks extends JPanel {
 	
 	private ArrayList<String> artistList;
 	private ArrayList<String> songList;
+	private ArrayList<String> albumList;
 	private String currentSelectedSong;
 	private JPanel songPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
@@ -46,11 +47,15 @@ public class listOfTracks extends JPanel {
 		
 		//Get the songs name
 		songList = new ArrayList<>();
+		artistList = new ArrayList<>();
+		albumList = new ArrayList<>();
 		for(File file : MP3list){
 			File src = new File(file.getAbsolutePath());
 			try {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
 				songList.add(tag.getSongTitle());
+				artistList.add(tag.getArtist());
+				albumList.add(tag.getAlbum());
 				System.out.println(tag.getSongTitle());
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
@@ -73,9 +78,13 @@ public class listOfTracks extends JPanel {
 				boolean adjust = listSong.getValueIsAdjusting();
 				if(!adjust){
 					currentSelectedSongList = listSong.getSelectedValuesList();
+					int i = listSong.getSelectedIndex();
+					
 					currentSelectedSong = currentSelectedSongList.get(0);
 					System.out.println(currentSelectedSong);
-					ta.setText(getCurrentSelectedSong().toString());
+					ta.setText("Song Title: " + songList.get(i)
+							+ "\nSong Artist: " + artistList.get(i)
+							+ "\nSong Album: " + albumList.get(i));
 					imagedisplay.add(ta);
 					ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
 					JLabel label1   = new JLabel();
@@ -93,12 +102,16 @@ public class listOfTracks extends JPanel {
 		File[] MP3list = getListFromFolder("res\\music");
 		
 		//Get the songs name
+		songList = new ArrayList<>();
 		artistList = new ArrayList<>();
+		albumList = new ArrayList<>();
 		for(File file : MP3list){
 			File src = new File(file.getAbsolutePath());
 			try {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
+				songList.add(tag.getSongTitle());
 				artistList.add(tag.getArtist());
+				albumList.add(tag.getAlbum());
 				System.out.println(tag.getArtist());
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
@@ -122,8 +135,12 @@ public class listOfTracks extends JPanel {
 				if(!adjust){
 					currentSelectedSongList = listArtist.getSelectedValuesList();
 					currentSelectedSong = currentSelectedSongList.get(0);
+					
+					int i = listSong.getSelectedIndex();
 					System.out.println(currentSelectedSong);
-					ta.setText(getCurrentSelectedSong().toString());
+					ta.setText("Song Title: " + songList.get(i)
+							+ "\nSong Artist: " + artistList.get(i)
+							+ "\nSong Album: " + albumList.get(i));
 					imagedisplay.add(ta);
 					ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
 					JLabel label1   = new JLabel();
