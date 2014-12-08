@@ -30,6 +30,7 @@ public class listOfTracks extends JPanel {
 	private JPanel artistPanel = new JPanel(new MigLayout("Debug"));
 	private JPanel imagedisplay = new JPanel(new MigLayout("Debug"));
 	private ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
+	private ImageIcon icon2 = new ImageIcon("res\\images\\Taylor Swift.jpg");
 	private JLabel label1   = new JLabel();
 	private JLabel ta = new JLabel();
 	private JScrollPane scrollListSong;
@@ -52,8 +53,8 @@ public class listOfTracks extends JPanel {
 			File src = new File(file.getAbsolutePath());
 			try {
 				ID3v1 tag = new MP3File(src).getID3v1Tag();
-				songList.add(tag.getSongTitle());
-				System.out.println(tag.getSongTitle());
+				songList.add(tag.getTitle());
+				System.out.println(tag.getTitle());
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,13 +77,16 @@ public class listOfTracks extends JPanel {
 				if(!adjust){
 					currentSelectedSongList = listSong.getSelectedValuesList();
 					currentSelectedSong = currentSelectedSongList.get(0);
-					System.out.println(currentSelectedSong);
+					if(getCurrentSelectedSong().toString().equalsIgnoreCase("Jubel")){
+						label1.setIcon(icon);
+					}
+					else{
+						label1.setIcon(icon2);
+					}
+					ta.setText(getCurrentSelectedSong().toString());
 					imagedisplay.add(ta);
-					label1.setIcon(icon);
 					imagedisplay.add(label1);
-					
 
-			
 				}
 			}
 	    };
@@ -101,6 +105,8 @@ public class listOfTracks extends JPanel {
 				artistList.add(tag.getArtist());
 				System.out.println(tag.getArtist());
 				ta.setText(tag.getArtist());
+	
+				
 			} catch (IOException | TagException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -124,12 +130,16 @@ public class listOfTracks extends JPanel {
 					currentSelectedSongList = listArtist.getSelectedValuesList();
 					currentSelectedSong = currentSelectedSongList.get(0);
 					System.out.println(currentSelectedSong);
+					if(getCurrentSelectedSong().toString().equalsIgnoreCase("Taylor Swift")){
+						label1.setIcon(icon2);
+					}
+					else{
+						label1.setIcon(icon);
+					}
 					ta.setText(getCurrentSelectedSong().toString());
 					imagedisplay.add(ta);
-					ImageIcon icon = new ImageIcon("res\\images\\Jubel.jpg");
-					JLabel label1   = new JLabel();
-					label1.setIcon(icon);
 					imagedisplay.add(label1);
+				
 
 			
 				}
